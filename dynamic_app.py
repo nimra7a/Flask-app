@@ -12,6 +12,36 @@ llm = HuggingFaceEndpoint(
   task = "text-generation"
 )
 
+
+st.header("Debug Research Tool")
+
+# Debug secret
+try:
+    hugging_face_key = st.secrets["HUGGINGFACE_API_KEY"]
+    st.write("Hugging Face key loaded ✅")
+except Exception as e:
+    st.error(f"Failed to load secret: {e}")
+
+# Test LLM instantiation
+try:
+    llm = HuggingFaceEndpoint(
+        repo_id="mistralai/Mistral-7B-Instruct-v0.2",
+        api_key=hugging_face_key,
+        task="text-generation"
+    )
+    model = ChatHuggingFace(llm=llm)
+    st.write("LLM initialized ✅")
+except Exception as e:
+    st.error(f"LLM init failed: {e}")
+
+# Load prompt template
+try:
+    template = load_prompt("./template.json")
+    st.write("Template loaded ✅")
+except Exception as e:
+    st.error(f"Template load failed: {e}")
+
+
 model = ChatHuggingFace(llm=llm)
 
 
