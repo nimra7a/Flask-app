@@ -2,7 +2,7 @@ import streamlit as st
 from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 from langchain_core.prompts import PromptTemplate, load_prompt
 import os
-import secret
+
 
 
 hugging_face_key = st.secrets["HuggingFaceHub_ACCESS_TOKEN"]
