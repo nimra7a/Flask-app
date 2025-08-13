@@ -1,7 +1,7 @@
 import streamlit as st
 from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 from langchain_core.prompts import PromptTemplate, load_prompt
-from langchain_core.chains import LLMChain
+from langchain import LLMChain
 import os
 
 
@@ -32,7 +32,7 @@ style_input = st.selectbox(
     ["Beginner Friendly", 
     "Code-Oriented", 
     "Technical", 
-    "Methametical"]
+    "Methematical"]
 )
 
 length_input = st.selectbox(

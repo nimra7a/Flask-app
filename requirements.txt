@@ -1,5 +1,6 @@
 streamlit
-langchain
 langchain-huggingface
 huggingface_hub
 pyngrok
+langchain>=0.1.0
+
