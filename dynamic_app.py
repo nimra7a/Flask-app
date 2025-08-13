@@ -1,6 +1,7 @@
 import streamlit as st
 from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 from langchain_core.prompts import PromptTemplate, load_prompt
+from langchain_core.chains import LLMChain
 import os
 
 
@@ -11,36 +12,6 @@ llm = HuggingFaceEndpoint(
   api_key=hugging_face_key,
   task = "text-generation"
 )
-
-
-st.header("Debug Research Tool")
-
-# Debug secret
-try:
-    hugging_face_key = st.secrets["HUGGINGFACE_API_KEY"]
-    st.write("Hugging Face key loaded ✅")
-except Exception as e:
-    st.error(f"Failed to load secret: {e}")
-
-# Test LLM instantiation
-try:
-    llm = HuggingFaceEndpoint(
-        repo_id="mistralai/Mistral-7B-Instruct-v0.2",
-        api_key=hugging_face_key,
-        task="text-generation"
-    )
-    model = ChatHuggingFace(llm=llm)
-    st.write("LLM initialized ✅")
-except Exception as e:
-    st.error(f"LLM init failed: {e}")
-
-# Load prompt template
-try:
-    template = load_prompt("./template.json")
-    st.write("Template loaded ✅")
-except Exception as e:
-    st.error(f"Template load failed: {e}")
-
 
 model = ChatHuggingFace(llm=llm)
 
@@ -73,7 +44,10 @@ template = load_prompt('./template.json')
 
 
 if st.button("Submit"):
-  chain = template | model
+  chain = LLMChain(
+    prompt=template,
+    llm=model
+  )
   result = chain.invoke({
     'paper_input':paper_input,
     'style_input':style_input,
