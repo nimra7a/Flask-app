@@ -1,6 +1,6 @@
 streamlit
-langchain-huggingface
-huggingface_hub
 pyngrok
 langchain>=0.1.0
+langchain_huggingface>=0.0.25
+huggingface_hub>=0.16
 
