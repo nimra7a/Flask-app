@@ -44,13 +44,10 @@ template = load_prompt('./template.json')
 
 
 if st.button("Submit"):
-  chain = LLMChain(
-    prompt=template,
-    llm=model
-  )
-  result = chain.invoke({
-    'paper_input':paper_input,
-    'style_input':style_input,
-    'length_input':length_input
-  })
-  st.write(result.content)
+   chain = LLMChain(prompt=template, llm=model)
+   result = chain.invoke({
+    'paper_input': paper_input,
+    'style_input': style_input,
+    'length_input': length_input
+   })
+   st.write(result.content)
