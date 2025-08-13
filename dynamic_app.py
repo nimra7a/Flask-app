@@ -4,7 +4,8 @@ from langchain_core.prompts import PromptTemplate, load_prompt
 import os
 import secret
 
-os.environ["HUGGINGFACEHUB_API_TOKEN"] = secret.HuggingFaceHub_ACCESS_TOKEN
+
+hugging_face_key = st.secrets["HuggingFaceHub_ACCESS_TOKEN"]
 llm = HuggingFaceEndpoint(
   repo_id="mistralai/Mistral-7B-Instruct-v0.2",
   task = "text-generation"
