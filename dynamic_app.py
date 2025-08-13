@@ -39,7 +39,7 @@ length_input = st.selectbox(
     ["Short (1-2 sentences)", "Medium (1-2 paragraphs)", "Long (detailed)"]
 )
 
-template = load_prompt('template.json')
+template = load_prompt('./template.json')
 
 
 if st.button("Submit"):
