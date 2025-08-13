@@ -8,6 +8,7 @@ import os
 hugging_face_key = st.secrets["HuggingFaceHub_ACCESS_TOKEN"]
 llm = HuggingFaceEndpoint(
   repo_id="mistralai/Mistral-7B-Instruct-v0.2",
+  api_key=huggingface_key
   task = "text-generation"
 )
 
