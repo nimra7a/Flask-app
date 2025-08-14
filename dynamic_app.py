@@ -6,12 +6,12 @@ from langchain import LLMChain
 hugging_face_key = st.secrets["HUGGINGFACE_API_KEY"]
 
 llm = HuggingFaceEndpoint(
-    repo_id="tiiuae/falcon-7b-instruct",
+    repo_id="HuggingFaceH4/zephyr-7b-beta",
     api_key=hugging_face_key,
     task="text-generation",
     max_new_tokens=512
 )
-
+model = ChatHuggingFace(llm=llm)
 st.header("Research Tool")
 
 paper_input = st.selectbox(
