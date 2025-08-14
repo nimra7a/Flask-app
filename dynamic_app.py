@@ -3,7 +3,7 @@ from langchain_huggingface import HuggingFaceEndpoint
 from langchain_core.prompts import load_prompt
 from langchain import LLMChain
 
-hugging_face_key = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
+hugging_face_key = st.secrets["HUGGINGFACE_API_KEY"]
 
 llm = HuggingFaceEndpoint(
     repo_id="tiiuae/falcon-7b-instruct",
