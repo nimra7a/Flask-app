@@ -8,7 +8,7 @@ import os
 
 hugging_face_key = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
 llm = HuggingFaceEndpoint(
-  repo_id="openai/gpt-oss-120b",
+  repo_id="mistralai/Mistral-7B-Instruct-v0.3",
   api_key=hugging_face_key,
   task = "text-generation"
 )
@@ -50,4 +50,4 @@ if st.button("Submit"):
     'style_input': style_input,
     'length_input': length_input
    })
-   st.write(result)
+   st.write(result.content)
