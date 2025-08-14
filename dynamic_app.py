@@ -3,7 +3,7 @@ from langchain_huggingface import HuggingFaceEndpoint
 from langchain.prompts import PromptTemplate
 from langchain import LLMChain
 
-hugging_face_key = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
+hugging_face_key = st.secrets["HUGGINGFACE_API_TOKEN"]
 
 # Use a free model
 llm = HuggingFaceEndpoint(
