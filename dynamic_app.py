@@ -4,9 +4,10 @@ from langchain_core.prompts import PromptTemplate, load_prompt
 from langchain import LLMChain
 import os
 
-
+hugging_face_key = st.secrets["HUGGINGFACE_API_KEY"]
 llm = HuggingFaceEndpoint(
   repo_id="google/flan-t5-base",
+  api_key=hugging_face_key,
   task = "text-generation"
 )
 
