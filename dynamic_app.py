@@ -1,36 +1,32 @@
 import streamlit as st
-from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
-from langchain_core.prompts import PromptTemplate, load_prompt
+from langchain_huggingface import HuggingFaceEndpoint
+from langchain_core.prompts import load_prompt
 from langchain import LLMChain
-import os
 
-hugging_face_key = st.secrets["HUGGINGFACE_API_KEY"]
+hugging_face_key = st.secrets["HUGGINGFACEHUB_API_TOKEN"]
+
 llm = HuggingFaceEndpoint(
-  repo_id="google/flan-t5-base",
-  api_key=hugging_face_key,
-  task = "text-generation"
+    repo_id="tiiuae/falcon-7b-instruct",
+    api_key=hugging_face_key,
+    task="text-generation",
+    max_new_tokens=512
 )
-
-model = ChatHuggingFace(llm=llm)
-
 
 st.header("Research Tool")
 
 paper_input = st.selectbox(
     "Select a research paper:",
-    ["DIRS-CLAHS: Underwater Image Enhancement",
-    "WGAN-GP for Alzheimer's MRI Classification",
-    "Deep Q-Network for LunarLander",
-    "ARIMA for Ethereum Price Forecasting"
+    [
+        "DIRS-CLAHS: Underwater Image Enhancement",
+        "WGAN-GP for Alzheimer's MRI Classification",
+        "Deep Q-Network for LunarLander",
+        "ARIMA for Ethereum Price Forecasting"
     ]
 )
 
 style_input = st.selectbox(
     "Select the explanation style:",
-    ["Beginner Friendly", 
-    "Code-Oriented", 
-    "Technical", 
-    "Methematical"]
+    ["Beginner Friendly", "Code-Oriented", "Technical", "Mathematical"]
 )
 
 length_input = st.selectbox(
@@ -40,12 +36,11 @@ length_input = st.selectbox(
 
 template = load_prompt('./template.json')
 
-
 if st.button("Submit"):
-   chain = LLMChain(prompt=template, llm=model)
-   result = chain.invoke({
-    'paper_input': paper_input,
-    'style_input': style_input,
-    'length_input': length_input
-   })
-   st.write(result.content)
+    chain = LLMChain(prompt=template, llm=llm)
+    result = chain.invoke({
+        'paper_input': paper_input,
+        'style_input': style_input,
+        'length_input': length_input
+    })
+    st.write(result["text"])  # HuggingFaceEndpoint returns a dict
