@@ -50,4 +50,4 @@ if st.button("Submit"):
     'style_input': style_input,
     'length_input': length_input
    })
-   st.write(result)
+   st.write(result["text"])
